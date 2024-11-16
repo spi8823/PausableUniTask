@@ -27,7 +27,7 @@ namespace PausableUniTask
 
         public TaskToken CreateToken()
         {
-            return new TaskToken();
+            return new TaskToken(this);
         }
 
         public void Cancel()
