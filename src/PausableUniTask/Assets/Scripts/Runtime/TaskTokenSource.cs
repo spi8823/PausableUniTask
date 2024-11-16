@@ -49,5 +49,11 @@ namespace PausableUniTask
         {
             isPaused = false;
         }
+
+        public void Dispose()
+        {
+            Reset();
+            ObjectPool<TaskTokenSource>.Push(this);
+        }
     }
 }

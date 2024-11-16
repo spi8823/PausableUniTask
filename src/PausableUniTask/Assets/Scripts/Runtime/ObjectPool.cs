@@ -32,10 +32,4 @@ internal interface IPoolable<T> : IDisposable where T : class, new()
     }
 
     void Reset();
-
-    void IDisposable.Dispose()
-    {
-        Reset();
-        ObjectPool<T>.Push(this as T);
-    }
 }
