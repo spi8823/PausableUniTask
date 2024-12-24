@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -17,6 +18,12 @@ namespace PausableUniTask
         public TaskToken(TaskTokenSource source)
         {
             this.source = source;
+        }
+
+        public async UniTask WaitWhilePaused()
+        {
+            while (isAlive && isPaused)
+                await UniTask.Yield();
         }
 
         public ChainScope Chain(TaskTokenSource child)
