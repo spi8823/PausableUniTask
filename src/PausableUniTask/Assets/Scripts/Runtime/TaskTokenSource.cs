@@ -15,6 +15,7 @@ namespace PausableUniTask
         public bool isCanceled { get; private set; }
         public bool isSkipped { get; private set; }
         public bool isPaused { get; private set; }
+        public bool isAlive => !isCanceled && !isSkipped;
 
         public TaskTokenSource() { }
 

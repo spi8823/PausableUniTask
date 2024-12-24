@@ -12,6 +12,7 @@ namespace PausableUniTask
         public bool isCanceled => source.isCanceled;
         public bool isSkipped => source.isSkipped;
         public bool isPaused => source.isPaused;
+        public bool isAlive => source.isAlive;
 
         public TaskToken(TaskTokenSource source)
         {

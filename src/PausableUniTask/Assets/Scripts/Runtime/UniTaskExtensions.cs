@@ -12,7 +12,7 @@ namespace PausableUniTask
             var time = 0f;
             while (time < duration)
             {
-                if (token.isCanceled || token.isSkipped)
+                if (!token.isAlive)
                     break;
 
                 if (!token.isPaused)
