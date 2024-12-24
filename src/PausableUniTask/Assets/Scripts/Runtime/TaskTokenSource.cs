@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
+using System;
 
 namespace PausableUniTask
 {
@@ -17,6 +14,11 @@ namespace PausableUniTask
         public bool isPaused { get; private set; }
         public bool isAlive => !isCanceled && !isSkipped;
 
+        public Action OnCanceled { get; set; }
+        public Action OnSkipped { get; set; }
+        public Action OnPaused { get; set; }
+        public Action OnResumed { get; set; }
+
         public TaskTokenSource() { }
 
         public void Reset()
@@ -24,6 +26,10 @@ namespace PausableUniTask
             isCanceled = false;
             isSkipped = false;
             isPaused = false;
+            OnCanceled = null;
+            OnSkipped = null;
+            OnPaused = null;
+            OnResumed = null;
         }
 
         public TaskToken CreateToken()
@@ -34,21 +40,25 @@ namespace PausableUniTask
         public void Cancel()
         {
             isCanceled = true;
+            OnCanceled?.Invoke();
         }
 
         public void Skip()
         {
             isSkipped = true;
+            OnSkipped?.Invoke();
         }
 
         public void Pause()
         {
             isPaused = true;
+            OnPaused?.Invoke();
         }
 
         public void Resume()
         {
             isPaused = false;
+            OnResumed?.Invoke();
         }
 
         public void Dispose()
