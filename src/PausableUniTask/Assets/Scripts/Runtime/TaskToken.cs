@@ -19,9 +19,9 @@ namespace PausableUniTask
             this.source = source;
         }
 
-        public void Chain(TaskTokenSource child)
+        public ChainScope Chain(TaskTokenSource child)
         {
-            source.Chain(child);
+            return source.Chain(child);
         }
 
         public void Unchain(TaskTokenSource child)

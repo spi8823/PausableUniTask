@@ -61,12 +61,13 @@ namespace PausableUniTask
             OnResumed?.Invoke();
         }
 
-        public void Chain(TaskTokenSource child)
+        public ChainScope Chain(TaskTokenSource child)
         {
             OnCanceled += child.Cancel;
             OnSkipped += child.Skip;
             OnPaused += child.Pause;
             OnResumed += child.Resume;
+            return new(this, child);
         }
 
         public void Unchain(TaskTokenSource child)
